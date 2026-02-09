@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabela com QR Code</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin: 20px auto;
+    }
+    td {
+      padding: 10px;
+      text-align: center;
+    }
+    a {
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<table border="0">
+  <tr>
+    <td>
+      <img src="004.avif" width="200" height="150">
+    </td>
+    <td>
+      <video width="300" controls loop>
+        <source src="002.mp4" type="video/mp4">
+      </video>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <a onclick="toggle('c4')">Aperte aqui!</a>
+    </td>
+    <td id="c4" hidden>
+      <img src="005.jpg" width="200" height="150">
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <a onclick="toggle('c6')">Aperte aqui!</a>
+    </td>
+    <td id="c6" hidden>
+      <img src="006.webp" width="200" height="150">
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <a onclick="toggle('c8')">Aperte aqui!</a>
+    </td>
+    <td id="c8" hidden>
+      <img src="007.jpg" width="200" height="150">
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <a onclick="gerarQRCode()">Gerar QR Code!</a>
+    </td>
+    <td id="c10" hidden>
+      <div id="qrcode"></div>
+    </td>
+  </tr>
+</table>
+
+<!-- Biblioteca QRCode.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+  // Mostrar/esconder células
+  function toggle(id) {
+    const celula = document.getElementById(id);
+    celula.hidden = !celula.hidden;
+  }
+
+  // Gerar QR Code apontando para seu GitHub Pages
+  function gerarQRCode() {
+    const celula = document.getElementById('c10');
+    const container = document.getElementById('qrcode');
+
+    celula.hidden = false; // mostra a célula do QR code
+    container.innerHTML = ""; // limpa QR code anterior
+
+    // Link da tabela no GitHub Pages
+    const urlDaTabela = "https://zanatta21.github.io/tabela/";
+
+    // Gera o QR code
+    new QRCode(container, {
+      text: urlDaTabela,
+      width: 150,
+      height: 150
+    });
+  }
+</script>
+
+</body>
+</html>
